@@ -17,10 +17,7 @@ cmake .. \
 	-DENABLE_SWIG_JAVA=false \
 	-DENABLE_SWIG_MATLAB=false \
 	-DENABLE_SWIG_OCTAVE=false \
-	${_PYTHON_BUILD_OPTS} \
-	-DPYTHON_NUMPY_INCLUDE_PATH=${SP_DIR}/numpy/core/include \
-	-DPYTHON_MODULE_INSTALL_DIR=${SP_DIR} \
-	-DPYTHON_EXTMODULE_INSTALL_DIR=${SP_DIR}
+	${_PYTHON_BUILD_OPTS}
 
 cmake --build . --config Release -- -j${CPU_COUNT}
 ctest -V
