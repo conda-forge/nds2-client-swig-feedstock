@@ -12,7 +12,7 @@ if %PY3K% equ 1 (
 )
 
 :: configure
-cmake .. \
+cmake .. ^
 	-G "%CMAKE_GENERATOR%" ^
 	-DCMAKE_BUILD_TYPE:STRING=Release ^
 	-DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" ^
