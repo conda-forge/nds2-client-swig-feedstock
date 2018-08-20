@@ -4,13 +4,6 @@ setlocal EnableDelayedExpansion
 mkdir build
 cd build
 
-:: choose between python2 and python3
-if %PY3K% equ 1 (
-	set _PYTHON_BUILD_OPTS="-DENABLE_SWIG_PYTHON2=no -DENABLE_SWIG_PYTHON3=yes -DPYTHON3_EXECUTABLE=%PYTHON%"
-) else (
-	set _PYTHON_BUILD_OPTS="-DENABLE_SWIG_PYTHON3=no -DENABLE_SWIG_PYTHON2=yes -DPYTHON2_EXECUTABLE=%PYTHON%"
-)
-
 :: configure
 cmake .. ^
 	-G "%CMAKE_GENERATOR%" ^
@@ -22,7 +15,9 @@ cmake .. ^
 	-DENABLE_SWIG_JAVA=false ^
 	-DENABLE_SWIG_MATLAB=false ^
 	-DENABLE_SWIG_OCTAVE=false ^
-	%_PYTHON_BUILD_OPTS%
+	-DENABLE_SWIG_PYTHON2=no ^
+	-DENABLE_SWIG_PYTHON3=yes ^
+	-DPYTHON_EXECUTABLE:PATH="%PYTHON%"
 if errorlevel 1 exit 1
 
 :: build
