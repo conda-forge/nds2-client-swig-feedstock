@@ -22,7 +22,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - nds2-client ={{ version }}
+    - nds2-client >=0.15.3
     - swig >=3.0.7
     - python
     - {{ pin_compatible('numpy') }}
@@ -35,11 +35,11 @@ outputs:
   - name: python-nds2-client
     requirements:
       host:
-        - nds2-client ={{ version }}
+        - nds2-client >=0.15.3
         - python
         - numpy
       run:
-        - nds2-client ={{ version }}
+        - nds2-client >=0.15.3
         - python
         - {{ pin_compatible('numpy') }}
     files:
