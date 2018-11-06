@@ -1,6 +1,7 @@
 {% set name = "nds2-client-swig" %}
 {% set version = "0.16.2" %}
 {% set sha256 = "f576a0beae08ddfd222807b96f2cf0f44c1dd1547cd4a4352f65fcc55fc46f28" %}
+{% set nds2_client_version = "0.16.1" %}
 
 package:
   name: {{ name }}
@@ -23,7 +24,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - nds2-client >=0.15.3
+    - nds2-client >={{ nds2_client_version }}
     - swig >=3.0.7
     - python
     - numpy
@@ -36,11 +37,11 @@ outputs:
   - name: python-nds2-client
     requirements:
       host:
-        - nds2-client >=0.15.3
+        - nds2-client >={{ nds2_client_version }}
         - python
         - numpy
       run:
-        - nds2-client >=0.15.3
+        - nds2-client >={{ nds2_client_version }}
         - python
         - {{ pin_compatible('numpy') }}
     files:
