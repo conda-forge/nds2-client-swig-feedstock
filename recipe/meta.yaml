@@ -39,6 +39,10 @@ outputs:
 
   - name: python-nds2-client
     script: install-python.sh
+    build:
+      error_overdepending: true
+      error_overlinking: true
+      skip: true  # [python_impl != 'cpython']
     requirements:
       build:
         - {{ compiler('c') }}
