@@ -1,14 +1,14 @@
 {% set name = "nds2-client-swig" %}
-{% set version = "0.16.6" %}
-{% set sha256 = "0184eae7cf7eeb1d0a4bb0cf32d57b0a9c60e59912546bd3116e740b2af176b7" %}
-{% set nds2_client_version = "0.16.4" %}
+{% set version = "0.16.7" %}
+{% set sha256 = "ddb2ceac6baadc58cddc5a980216b4684bd8669e9587b46477831e55b77f0a39" %}
+{% set nds2_client_version = "0.16.5" %}
 
 package:
   name: "{{ name }}"
   version: "{{ version }}"
 
 source:
-  url: "http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.gz"
+  url: "http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.bz2"
   sha256: "{{ sha256 }}"
   patches:
     - macos-static-python.patch  # [osx]
@@ -54,8 +54,8 @@ outputs:
         - swig >=3.0.7,<4
       run:
         - nds2-client >={{ nds2_client_version }}
-        - python
         - {{ pin_compatible('numpy') }}
+        - python
     test:
       imports:
         - nds2

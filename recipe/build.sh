@@ -5,6 +5,8 @@
 # This script needs: ${c_compiler}, ${cxx_compiler}
 #
 
+set -ex
+
 mkdir -p build
 pushd build
 
