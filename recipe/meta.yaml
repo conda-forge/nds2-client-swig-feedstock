@@ -15,9 +15,8 @@ source:
 
 build:
   error_overdepending: true
-  error_overlinking: true
-  number: 0
-  skip: true  # [win]
+  error_overlinking: true  # [not win]
+  number: 1
 
 requirements:
   build:
@@ -29,6 +28,7 @@ requirements:
   host:
     - swig >=3.0.7,<4
     - nds2-client {{ nds2_client_version }}
+
 test:
   commands:
     - test -f ${PREFIX}/include/nds2-client/nds.i  # [unix]
@@ -38,7 +38,8 @@ outputs:
   - name: nds2-client-swig
 
   - name: python-nds2-client
-    script: install-python.sh
+    script: install-python.sh  # [not win]
+    script: install-python.bat  # [win]
     build:
       error_overdepending: true
       error_overlinking: true
