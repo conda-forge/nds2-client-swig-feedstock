@@ -12,6 +12,7 @@ source:
   sha256: "{{ sha256 }}"
   patches:
     - macos-static-python.patch  # [osx]
+    - windows-swig-links.patch  # [win]
 
 build:
   error_overdepending: true
