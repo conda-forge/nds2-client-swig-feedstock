@@ -1,8 +1,8 @@
 setlocal EnableDelayedExpansion
 
 :: use local build folder
-mkdir build
-cd build
+mkdir _build
+cd _build
 
 :: configure
 cmake "%SRC_DIR%" ^
@@ -14,12 +14,16 @@ cmake "%SRC_DIR%" ^
     -DENABLE_SWIG_MATLAB:BOOL=no ^
     -DENABLE_SWIG_OCTAVE:BOOL=no ^
     -DENABLE_SWIG_PYTHON3:BOOL=yes
+if errorlevel 1 exit 1
 
-# build
+:: build
 cmake --build python --parallel "%CPU_COUNT%"
+if errorlevel 1 exit 1
 
-# install
+:: install
 cmake --build python --parallel "%CPU_COUNT%" --target install
+if errorlevel 1 exit 1
 
-# test
+:: test
 ctest --extra-verbose --output-on-failure
+if errorlevel 1 exit 1

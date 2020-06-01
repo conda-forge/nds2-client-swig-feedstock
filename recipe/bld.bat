@@ -3,7 +3,7 @@ mkdir _build
 cd _build
 
 :: configure
-cmake .. ^
+cmake "%SRC_DIR%" ^
     -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo ^
     -DCMAKE_DISABLE_FIND_PACKAGE_Doxygen:BOOL=yes ^
     -DCMAKE_DISABLE_FIND_PACKAGE_Java:BOOL=yes ^
