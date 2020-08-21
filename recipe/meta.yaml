@@ -1,15 +1,15 @@
 {% set name = "nds2-client-swig" %}
-{% set version = "0.16.7" %}
-{% set sha256 = "ddb2ceac6baadc58cddc5a980216b4684bd8669e9587b46477831e55b77f0a39" %}
+{% set version = "0.16.8" %}
+{% set sha256 = "1f7fd70fa9df6cb1bef7762115048e1cf2511ca60e51a451aed7fb0229b9fd8e" %}
 {% set nds2_client_version = "0.16.5" %}
 
 package:
-  name: "{{ name }}"
-  version: "{{ version }}"
+  name: {{ name }}
+  version: {{ version }}
 
 source:
-  url: "http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.bz2"
-  sha256: "{{ sha256 }}"
+  url: http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.bz2
+  sha256: {{ sha256 }}
   patches:
     - macos-static-python.patch  # [osx]
 
@@ -67,20 +67,20 @@ outputs:
       imports:
         - nds2
     about:
-      home: "https://wiki.ligo.org/Computing/NDSClient"
-      license: "GPL-3.0-or-later"
-      license_family: "GPL"
-      license_file: "COPYING"
-      summary: "Python extensions for NDS2"
-      description: "This provides python wrappers for the nds2 client."
+      home: https://wiki.ligo.org/Computing/NDSClient
+      license: GPL-3.0-or-later
+      license_family: GPL
+      license_file: COPYING
+      summary: Python extensions for NDS2
+      description: This provides python wrappers for the nds2 client.
 
 about:
-  home: "https://wiki.ligo.org/Computing/NDSClient"
-  license: "GPL-3.0-or-later"
-  license_family: "GPL"
-  license_file: "COPYING"
-  summary: "NDS2 Client interface SWIG wrappings"
-  description: "This provides SWIG interface files for the NDS2 client."
+  home: https://wiki.ligo.org/Computing/NDSClient
+  license: GPL-3.0-or-later
+  license_family: GPL
+  license_file: COPYING
+  summary: NDS2 Client interface SWIG wrappings
+  description: This provides SWIG interface files for the NDS2 client.
 
 extra:
   recipe-maintainers:
