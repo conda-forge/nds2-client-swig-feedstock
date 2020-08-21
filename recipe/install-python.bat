@@ -1,8 +1,7 @@
-setlocal EnableDelayedExpansion
-
 :: use local build folder
-mkdir _build
-cd _build
+set "_builddir=_build%PY_VER%"
+mkdir "%_builddir%"
+cd "%_builddir%"
 
 :: configure
 cmake "%SRC_DIR%" ^
@@ -10,7 +9,7 @@ cmake "%SRC_DIR%" ^
     -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo ^
     -DCMAKE_DISABLE_FIND_PACKAGE_Doxygen:BOOL=yes ^
     -DCMAKE_DISABLE_FIND_PACKAGE_Java:BOOL=yes ^
-    -DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" ^
+    -DCMAKE_INSTALL_PREFIX:PATH="%PREFIX%" ^
     -DCMAKE_PREFIX_PATH:PATH="%LIBRARY_PREFIX%" ^
     -Dnds2-client_DIR:PATH="%LIBRARY_BIN%" ^
     -DENABLE_SWIG_JAVA:BOOL=no ^

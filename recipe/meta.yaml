@@ -56,6 +56,7 @@ outputs:
         - pkg-config  # [not win]
         - make  # [not win]
       host:
+        - libpython  # [win]
         - nds2-client {{ nds2_client_version }}
         - {{ pin_subpackage('nds2-client-swig', exact=True) }}
         - numpy
