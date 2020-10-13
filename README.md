@@ -5,7 +5,7 @@ Home: https://wiki.ligo.org/Computing/NDSClient
 
 Package license: GPL-3.0-or-later
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nds2-client-swig-feedstock/blob/master/LICENSE.txt)
 
 Summary: NDS2 Client interface SWIG wrappings
 
