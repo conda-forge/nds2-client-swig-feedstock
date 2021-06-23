@@ -1,6 +1,6 @@
 {% set name = "nds2-client-swig" %}
-{% set version = "0.16.8" %}
-{% set sha256 = "1f7fd70fa9df6cb1bef7762115048e1cf2511ca60e51a451aed7fb0229b9fd8e" %}
+{% set version = "0.16.9" %}
+{% set sha256 = "48b74aacea2fa5c2e6d9f2675476c17405cc8c6b9cebed7579f2b4761a36657d" %}
 {% set nds2_client_version = "0.16.6" %}
 
 package:
@@ -17,7 +17,7 @@ source:
 build:
   error_overdepending: true
   error_overlinking: true  # [not win]
-  number: 1
+  number: 0
 
 requirements:
   build:
