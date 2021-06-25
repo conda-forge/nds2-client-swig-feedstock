@@ -9,6 +9,8 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nds2-client-swi
 
 Summary: NDS2 Client interface SWIG wrappings
 
+Development: https://git.ligo.org/nds/nds2-client.git
+
 This provides SWIG interface files for the NDS2 client.
 
 Current build status
