@@ -4,32 +4,30 @@
 #
 
 set -ex
-pushd ${SRC_DIR}/build
-
-# switch between python major versions
-ENABLEPY2="no"
-ENABLEPY3="no"
-[ "${PY3K}" -eq 1 ] && ENABLEPY3="yes" || ENABLEPY2="yes"
+mkdir -p _build${PY_VER}
+cd _build${PY_VER}
 
 # configure
-cmake ${SRC_DIR} \
-  -DCMAKE_INSTALL_PREFIX=${PREFIX} \
-  -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-  -DCMAKE_DISABLE_FIND_PACKAGE_Doxygen=yes \
-  -DENABLE_SWIG_JAVA=no \
-  -DENABLE_SWIG_MATLAB=no \
-  -DENABLE_SWIG_OCTAVE=no \
-  -DENABLE_SWIG_PYTHON2=${ENABLEPY2} \
-  -DENABLE_SWIG_PYTHON3=${ENABLEPY3}
+cmake \
+	${SRC_DIR} \
+	${CMAKE_ARGS} \
+	-DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo \
+	-DCMAKE_DISABLE_FIND_PACKAGE_Doxygen:BOOL=yes \
+	-DENABLE_SWIG_JAVA:BOOL=no \
+	-DENABLE_SWIG_MATLAB:BOOL=no \
+	-DENABLE_SWIG_OCTAVE:BOOL=no \
+	-DENABLE_SWIG_PYTHON2:BOOL=no \
+	-DENABLE_SWIG_PYTHON3:BOOL=yes \
+;
 
 # build
-cmake --build python -- -j ${CPU_COUNT}
+cmake --build python --parallel ${CPU_COUNT} --verbose
 
 # install
-cmake --build python --target install
+cmake --build python --parallel ${CPU_COUNT} --verbose --target install
 
 # test
-ctest --extra-verbose --output-on-failure
+ctest --parallel ${CPU_COUNT} --extra-verbose --output-on-failure
 
 # remove unnecessary testing files
 rm -rvf ${PREFIX}/libexec/nds2-client

@@ -1,27 +1,28 @@
 #!/bin/bash
-#
-# Build the common SWIG Interface libraries for the NDS2Client
-#
-# This script needs: ${c_compiler}, ${cxx_compiler}
-#
 
 set -ex
 
-mkdir -p build
-pushd build
+mkdir -p _build
+pushd _build
 
-cmake ${SRC_DIR} \
-  -DCMAKE_INSTALL_PREFIX=${PREFIX} \
-  -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-  -DCMAKE_DISABLE_FIND_PACKAGE_Doxygen=yes \
-  -DENABLE_SWIG_JAVA=no \
-  -DENABLE_SWIG_MATLAB=no \
-  -DENABLE_SWIG_OCTAVE=no \
-  -DENABLE_SWIG_PYTHON2=no \
-  -DENABLE_SWIG_PYTHON3=no
+# configure
+cmake \
+	${SRC_DIR} \
+	${CMAKE_ARGS} \
+	-DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo \
+	-DCMAKE_DISABLE_FIND_PACKAGE_Doxygen:BOOL=yes \
+	-DENABLE_SWIG_JAVA:BOOL=no \
+	-DENABLE_SWIG_MATLAB:BOOL=no \
+	-DENABLE_SWIG_OCTAVE:BOOL=no \
+	-DENABLE_SWIG_PYTHON2:BOOL=no \
+	-DENABLE_SWIG_PYTHON3:BOOL=no \
+;
 
-cmake --build . -- -j${CPU_COUNT}
+# build
+cmake --build . --parallel ${CPU_COUNT} --verbose
 
-ctest --extra-verbose --output-on-failure
+# test
+ctest --parallel ${CPU_COUNT} --extra-verbose --output-on-failure
 
-cmake --build . --target install
+# install
+cmake --build . --parallel ${CPU_COUNT} --verbose --target install
