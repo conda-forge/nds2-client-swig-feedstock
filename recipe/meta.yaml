@@ -1,15 +1,16 @@
 {% set name = "nds2-client-swig" %}
 {% set version = "0.16.10" %}
-{% set sha256 = "ebc7f66d7c41f154f4a1ab3b2f4c574256c851d54f4e83031a68665c687b813e" %}
+
+# dependency versions
 {% set nds2_client_version = "0.16.7" %}
 
 package:
-  name: {{ name }}
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
   url: http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.bz2
-  sha256: {{ sha256 }}
+  sha256: ebc7f66d7c41f154f4a1ab3b2f4c574256c851d54f4e83031a68665c687b813e
   patches:
     - macos-static-python.patch  # [osx]
     - windows-swig-links.patch  # [win]
@@ -24,7 +25,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake >=3.6
-    - make  # [not win]
+    - make  # [unix]
     - pkg-config  # [not win]
     - swig >=3.0.7
   host:
@@ -53,7 +54,7 @@ outputs:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - cmake >=3.6
-        - make  # [not win]
+        - make  # [unix]
         - pkg-config  # [not win]
         - swig >=3.0.7
         # extras for cross compilation
