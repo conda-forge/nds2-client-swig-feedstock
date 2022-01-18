@@ -56,6 +56,10 @@ outputs:
         - make  # [not win]
         - pkg-config  # [not win]
         - swig >=3.0.7
+        # extras for cross-compiling
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - numpy                                  # [build_platform != target_platform]
+        - python                                 # [build_platform != target_platform]
       host:
         - libpython  # [win]
         - nds2-client {{ nds2_client_version }}
