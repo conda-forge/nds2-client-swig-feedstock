@@ -28,7 +28,9 @@ cmake --build python --parallel ${CPU_COUNT} --verbose
 cmake --build python --parallel ${CPU_COUNT} --verbose --target install
 
 # test
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
 ctest --parallel ${CPU_COUNT} --extra-verbose --output-on-failure
+fi
 
 # remove unnecessary testing files
 rm -rvf ${PREFIX}/libexec/nds2-client
