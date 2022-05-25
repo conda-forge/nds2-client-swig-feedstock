@@ -54,6 +54,7 @@ outputs:
         - {{ compiler('cxx') }}
         - cmake >=3.6
         - make  # [not win]
+        - openjdk  # [build_platform != target_platform]
         - pkg-config  # [not win]
         - swig >=3.0.7
       host:
