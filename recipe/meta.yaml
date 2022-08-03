@@ -1,7 +1,7 @@
 {% set name = "nds2-client-swig" %}
-{% set version = "0.16.11" %}
-{% set sha256 = "b4a6fc3e2be91e09f27699779affaad677c4a83ecaaa7b1ed4a77e599f9de3d1" %}
-{% set nds2_client_version = "0.16.7" %}
+{% set version = "0.16.12" %}
+
+{% set nds2_client_version = "0.16.8" %}
 
 package:
   name: {{ name }}
@@ -9,10 +9,11 @@ package:
 
 source:
   url: http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.bz2
-  sha256: {{ sha256 }}
+  sha256: d356296f4a137d5e95401b1279e8dbce8b4b7dc8d87d319b09d1a57331caca06
   patches:
-    - macos-static-python.patch  # [osx]
-    - windows-swig-links.patch  # [win]
+    - 0001-python-add-linker-flag-for-the-directory-containing-.patch
+    - 0002-python-fix-linking-issues-with-ndscxx.patch
+    - 0003-python-use-undefined-dynamic_lookup-on-macos.patch
 
 build:
   error_overdepending: true
@@ -24,8 +25,8 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake >=3.6
-    - make  # [not win]
-    - pkg-config  # [not win]
+    - make  # [unix]
+    - pkg-config
     - swig >=3.0.7
   host:
     - nds2-client {{ nds2_client_version }}
@@ -54,13 +55,13 @@ outputs:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - cmake >=3.6
-        - make  # [not win]
-        - pkg-config  # [not win]
+        - make  # [unix]
+        - pkg-config
         - swig >=3.0.7
         # extras for cross-compiling
-        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-        - numpy                                  # [build_platform != target_platform]
-        - python                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+        - numpy                               # [build_platform != target_platform]
+        - python                              # [build_platform != target_platform]
       host:
         - libpython  # [win]
         - nds2-client {{ nds2_client_version }}
@@ -95,3 +96,4 @@ about:
 extra:
   recipe-maintainers:
     - duncanmmacleod
+    - emaros
