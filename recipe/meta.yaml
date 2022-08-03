@@ -11,8 +11,9 @@ source:
   url: http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.bz2
   sha256: {{ sha256 }}
   patches:
-    - macos-static-python.patch  # [osx]
-    - windows-swig-links.patch  # [win]
+    - 0001-python-add-linker-flag-for-the-directory-containing-.patch
+    - 0002-python-fix-linking-issues-with-ndscxx.patch
+    - 0003-python-use-undefined-dynamic_lookup-on-macos.patch
 
 build:
   error_overdepending: true

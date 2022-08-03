@@ -1,0 +1,36 @@
+From 912475f0fb40fa86d7b1419b1a22531db74f2122 Mon Sep 17 00:00:00 2001
+From: "duncan.macleod" <duncan.macleod@ligo.org>
+Date: Wed, 3 Aug 2022 10:02:36 +0100
+Subject: [PATCH 3/3] python: use -undefined dynamic_lookup on macos
+
+---
+ .../Autotools/ArchiveX/cx_swig_python_module.cmake       | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/swig/config/cmake/Modules/Autotools/ArchiveX/cx_swig_python_module.cmake b/swig/config/cmake/Modules/Autotools/ArchiveX/cx_swig_python_module.cmake
+index f488363..63c107b 100644
+--- a/swig/config/cmake/Modules/Autotools/ArchiveX/cx_swig_python_module.cmake
++++ b/swig/config/cmake/Modules/Autotools/ArchiveX/cx_swig_python_module.cmake
+@@ -81,13 +81,16 @@ function(cx_swig_python_module)
+     PROPERTIES
+       OUTPUT_NAME _${ARG_MODULE})
+   if ( APPLE )
++    swig_link_libraries( ${target_name} ${ARG_LINK_LIBRARIES} )
+     set_target_properties(${SWIG_MODULE_${target_name}_REAL_NAME}
+       PROPERTIES
+         INSTALL_RPATH "${CMAKE_INSTALL_FULL_LIBDIR}"
+-        BUILD_WITH_INSTALL_RPATH TRUE )
++        BUILD_WITH_INSTALL_RPATH TRUE
++        LINK_FLAGS "-undefined dynamic_lookup"
++    )
++  else ( )
++    swig_link_libraries( ${target_name} ${${ARG_PREFIX}_LIBRARIES} ${ARG_LINK_LIBRARIES} )
+   endif( )
+-  # cm_msg_debug_variable(${ARG_PREFIX}_LIBRARIES)
+-  swig_link_libraries( ${target_name} ${${ARG_PREFIX}_LIBRARIES} ${ARG_LINK_LIBRARIES} )
+ 
+   #----------------------------------------------------------------------
+   # Compile .py files
+-- 
+2.20.1
+

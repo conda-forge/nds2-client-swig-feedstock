@@ -1,0 +1,35 @@
+From dd061963d6d890467f81b71944b8617e64280baf Mon Sep 17 00:00:00 2001
+From: "duncan.macleod" <duncan.macleod@ligo.org>
+Date: Wed, 3 Aug 2022 10:00:42 +0100
+Subject: [PATCH 2/3] python: fix linking issues with ndscxx
+
+mainly on windows
+---
+ swig/python/python3/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/swig/python/python3/CMakeLists.txt b/swig/python/python3/CMakeLists.txt
+index d403bf4..786ee1e 100644
+--- a/swig/python/python3/CMakeLists.txt
++++ b/swig/python/python3/CMakeLists.txt
+@@ -37,7 +37,7 @@ if ( NOT DEFINED ENABLE_SWIG_PYTHON3 OR ENABLE_SWIG_PYTHON3 )
+           ${CMAKE_CURRENT_BINARY_DIR}/../module
+           ${CMAKE_CURRENT_SOURCE_DIR}/../../common/module
+           ${CMAKE_CURRENT_BINARY_DIR}/../../common/module
+-          ${nds2-client_INCLUDE_DIRS}
++          ${NDS_CLIENT_INCLUDE_DIRS}
+           ${PYTHON3_NUMPY_INCLUDE_PATH}
+           ${PYTHON3_INCLUDE_PATH}
+           )
+@@ -59,7 +59,7 @@ if ( NOT DEFINED ENABLE_SWIG_PYTHON3 OR ENABLE_SWIG_PYTHON3 )
+           PREFIX         PYTHON3
+           INTERFACE_FILE ${INTERFACE_FILE}
+           MODULE         nds2
+-          LINK_LIBRARIES nds::cxx
++          LINK_LIBRARIES ${ndscxx_LIBRARY_PATH}
+           SWIG_FLAGS "-py3" "-shadow" "-importall" "-Wall" "-threads" "-O"
+           )
+       set( NDS_PYTHON_VERSION_MAJOR ${PYTHON3_VERSION_MAJOR} )
+-- 
+2.20.1
+
