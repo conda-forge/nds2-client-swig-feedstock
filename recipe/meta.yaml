@@ -48,6 +48,8 @@ outputs:
       ignore_run_exports:
         - libstdcxx-ng  # [linux]
         - vs2015_runtime  # [win]
+      # see https://git.ligo.org/nds/nds2-client/-/issues/141
+      skip: true  # [win]
     requirements:
       build:
         - {{ compiler('c') }}
