@@ -92,6 +92,7 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-nds2--client--java-green.svg)](https://anaconda.org/conda-forge/nds2-client-java) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/nds2-client-java.svg)](https://anaconda.org/conda-forge/nds2-client-java) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/nds2-client-java.svg)](https://anaconda.org/conda-forge/nds2-client-java) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/nds2-client-java.svg)](https://anaconda.org/conda-forge/nds2-client-java) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-nds2--client--swig-green.svg)](https://anaconda.org/conda-forge/nds2-client-swig) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/nds2-client-swig.svg)](https://anaconda.org/conda-forge/nds2-client-swig) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/nds2-client-swig.svg)](https://anaconda.org/conda-forge/nds2-client-swig) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/nds2-client-swig.svg)](https://anaconda.org/conda-forge/nds2-client-swig) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-python--nds2--client-green.svg)](https://anaconda.org/conda-forge/python-nds2-client) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/python-nds2-client.svg)](https://anaconda.org/conda-forge/python-nds2-client) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/python-nds2-client.svg)](https://anaconda.org/conda-forge/python-nds2-client) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/python-nds2-client.svg)](https://anaconda.org/conda-forge/python-nds2-client) |
 
@@ -105,41 +106,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `nds2-client-swig, python-nds2-client` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `nds2-client-java, nds2-client-swig, python-nds2-client` can be installed with `conda`:
 
 ```
-conda install nds2-client-swig python-nds2-client
-```
-
-or with `mamba`:
-
-```
-mamba install nds2-client-swig python-nds2-client
-```
-
-It is possible to list all of the versions of `nds2-client-swig` available on your platform with `conda`:
-
-```
-conda search nds2-client-swig --channel conda-forge
+conda install nds2-client-java nds2-client-swig python-nds2-client
 ```
 
 or with `mamba`:
 
 ```
-mamba search nds2-client-swig --channel conda-forge
+mamba install nds2-client-java nds2-client-swig python-nds2-client
+```
+
+It is possible to list all of the versions of `nds2-client-java` available on your platform with `conda`:
+
+```
+conda search nds2-client-java --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search nds2-client-java --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search nds2-client-swig --channel conda-forge
+mamba repoquery search nds2-client-java --channel conda-forge
 
-# List packages depending on `nds2-client-swig`:
-mamba repoquery whoneeds nds2-client-swig --channel conda-forge
+# List packages depending on `nds2-client-java`:
+mamba repoquery whoneeds nds2-client-java --channel conda-forge
 
-# List dependencies of `nds2-client-swig`:
-mamba repoquery depends nds2-client-swig --channel conda-forge
+# List dependencies of `nds2-client-java`:
+mamba repoquery depends nds2-client-java --channel conda-forge
 ```
 
 
