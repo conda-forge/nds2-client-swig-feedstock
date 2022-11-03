@@ -87,6 +87,7 @@ outputs:
       ignore_run_exports:
         - numpy
         - python  # [not win]
+        - ucrt  # [win]
         - vs2015_runtime  # [win]
       skip: true  # [python_impl != 'cpython']
     requirements:
