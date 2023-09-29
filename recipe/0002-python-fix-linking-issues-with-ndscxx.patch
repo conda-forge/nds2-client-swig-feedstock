@@ -1,7 +1,7 @@
 From dd061963d6d890467f81b71944b8617e64280baf Mon Sep 17 00:00:00 2001
 From: "duncan.macleod" <duncan.macleod@ligo.org>
 Date: Wed, 3 Aug 2022 10:00:42 +0100
-Subject: [PATCH 2/3] python: fix linking issues with ndscxx
+Subject: [PATCH 2/5] python: fix linking issues with ndscxx
 
 mainly on windows
 ---
@@ -31,5 +31,5 @@ index d403bf4..786ee1e 100644
            )
        set( NDS_PYTHON_VERSION_MAJOR ${PYTHON3_VERSION_MAJOR} )
 -- 
-2.20.1
+2.41.0
 
