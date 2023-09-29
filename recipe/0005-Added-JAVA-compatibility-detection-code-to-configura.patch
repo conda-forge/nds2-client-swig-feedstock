@@ -1,0 +1,115 @@
+From 838515d24bf5a8ed43ec9c0792c9c664cb7dcf25 Mon Sep 17 00:00:00 2001
+From: Ed Maros <ed.maros@ligo.org>
+Date: Thu, 27 Oct 2022 14:54:42 -0700
+Subject: [PATCH 5/5] Added JAVA compatibility detection code to configuration
+ process (clossed #110)
+
+(cherry picked from commit bbc7ec4355071f5757e33fd8af94aa603f9949e4)
+---
+ swig/CMakeLists.txt             |  1 +
+ swig/ChangeLog.md               |  4 ++++
+ swig/java/CMakeLists.txt        | 32 ++++++++++++++++++++++++++++++++
+ swig/java/module/CMakeLists.txt |  3 +--
+ swig/java/test/CMakeLists.txt   |  2 +-
+ 5 files changed, 39 insertions(+), 3 deletions(-)
+
+diff --git a/swig/CMakeLists.txt b/swig/CMakeLists.txt
+index f819fae..baed8e9 100644
+--- a/swig/CMakeLists.txt
++++ b/swig/CMakeLists.txt
+@@ -366,6 +366,7 @@ message(STATUS "      SWIG interface for MATLAB is   ${IS_ENABLED_VALUE}")
+ message(STATUS " Other programs:" )
+ message(STATUS "      SWIG                           ${SWIG_EXECUTABLE} - ${SWIG_VERSION}" )
+ message(STATUS "      JAVA                           $ENV{JAVA}" )
++message(STATUS "      JAVA_COMPATIBILITY             ${JAVA_COMPATIBILITY}" )
+ message(STATUS "      MATLAB                         ${PROG_MATLAB}" )
+ message(STATUS "      PYTHON2                        ${PYTHON2_EXECUTABLE}" )
+ message(STATUS "      PYTHON2_VERSION_STRING         ${PYTHON2_VERSION_STRING}" )
+diff --git a/swig/ChangeLog.md b/swig/ChangeLog.md
+index b827a77..c0235b7 100644
+--- a/swig/ChangeLog.md
++++ b/swig/ChangeLog.md
+@@ -1,3 +1,7 @@
++nds2-client-swig-NEXT
++-----------------------------
++  * Added JAVA compatibility detection code to configuration process (clossed #110)
++
+ nds2-client-swig-0.16.12
+ -----------------------------
+   * Fixed pythoon shebang lines for EL8
+diff --git a/swig/java/CMakeLists.txt b/swig/java/CMakeLists.txt
+index 0f475da..ab0ab67 100644
+--- a/swig/java/CMakeLists.txt
++++ b/swig/java/CMakeLists.txt
+@@ -19,6 +19,38 @@ if ( JAVA_FOUND AND JNI_FOUND )
+     set( ENABLE_SWIG_JAVA "yes"
+         CACHE BOOL "Control the building of the SWIG bindings for Java" )
+ 
++    #--------------------------------------------------------------------
++    # Test for compatibility
++    #--------------------------------------------------------------------
++    file( WRITE ${CMAKE_CURRENT_BINARY_DIR}/compatibility_check.java "" )
++    set( JAVA_COMPATIBILITY_REGEX_ "^.* (obsolete|no longer supported[.]) .*$" )
++    foreach( JAVA_COMPATIBILITY_ 5 6 7 8 9 10 11 )
++        message( STATUS "Checking ${Java_JAVAC_EXECUTABLE} for ${JAVA_COMPATIBILITY_}" )
++        execute_process(
++            COMMAND ${Java_JAVAC_EXECUTABLE}
++            -source ${JAVA_COMPATIBILITY_}
++            -target ${JAVA_COMPATIBILITY_}
++            ${CMAKE_CURRENT_BINARY_DIR}/compatibility_check.java
++            OUTPUT_VARIABLE OUTPUT_STRING
++            ERROR_VARIABLE ERROR_STRING
++            OUTPUT_STRIP_TRAILING_WHITESPACE
++            ERROR_STRIP_TRAILING_WHITESPACE
++            )
++        message( STATUS "LOOKING FOR '${JAVA_COMPATIBILITY_REGEX_}' IN: ${ERROR_STRING}" )
++        string( REGEX REPLACE "${JAVA_COMPATIBILITY_REGEX_}" "" OBSOLETE_FOUND_STRING "${ERROR_STRING}" )
++        message( STATUS "OBSOLETE_FOUND_STRING ${OBSOLETE_FOUND_STRING}" )
++        string( LENGTH "${OBSOLETE_FOUND_STRING}" OBSOLETE_FOUND )
++        if ( OBSOLETE_FOUND GREATER 0 )
++            set( JAVA_COMPATIBILITY ${JAVA_COMPATIBILITY_} CACHE INTERNAL "Backwards compatibility level" )
++            break( )
++        endif( )
++    endforeach()
++    file( REMOVE ${CMAKE_CURRENT_BINARY_DIR}/compatibility_check.java )
++    message( STATUS "Compiling code to be backwards compatible with Java ${JAVA_COMPATIBILITY}" )
++
++    #--------------------------------------------------------------------
++    # 
++    #--------------------------------------------------------------------
+     if ( ${Java_VERSION_STRING} GREATER "1.8"  )
+         set( NDS_EXTEND_JAVA_BOOT_LIBRARY_PATH "" )
+     else ( ${Java_VERSION_STRING} GREATER "1.8"  )
+diff --git a/swig/java/module/CMakeLists.txt b/swig/java/module/CMakeLists.txt
+index 5c9419d..95332c9 100644
+--- a/swig/java/module/CMakeLists.txt
++++ b/swig/java/module/CMakeLists.txt
+@@ -100,11 +100,10 @@ if ( ENABLE_SWIG_JAVA )
+     set(CMAKE_SWIG_FLAGS -O -package nds2)
+     set(CMAKE_SWIG_OUTDIR nds2)
+     set_property(SOURCE ${INTERFACE_FILE} PROPERTY CPLUSPLUS ON)
+-    message( STATUS "Java_VERSION_MAJOR: ${Java_VERSION_MAJOR}")
+-    set(CMAKE_JAVA_COMPILE_FLAGS -source 1.7 -target 1.7 )
+     set(_build_java_sources_cmd "")
+ 
+     set_source_files_properties(${WRAPPER_FILE} PROPERTIES GENERATED true)
++    set(CMAKE_JAVA_COMPILE_FLAGS -source ${JAVA_COMPATIBILITY} -target ${JAVA_COMPATIBILITY} )
+     set(CMAKE_JAVAC_WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+     set(CMAKE_JAVA_CLASS_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/nds2)
+     set_source_files_properties(${built_java_sources} PROPERTIES GENERATED true)
+diff --git a/swig/java/test/CMakeLists.txt b/swig/java/test/CMakeLists.txt
+index 1b4d2bf..545d34c 100644
+--- a/swig/java/test/CMakeLists.txt
++++ b/swig/java/test/CMakeLists.txt
+@@ -75,7 +75,7 @@ if ( ENABLE_SWIG_JAVA )
+         #--------------------------------------------------------------------
+         #
+         #--------------------------------------------------------------------
+-        set(CMAKE_JAVA_COMPILE_FLAGS -source 1.7 -target 1.7 )
++        set(CMAKE_JAVA_COMPILE_FLAGS -source ${JAVA_COMPATIBILITY} -target ${JAVA_COMPATIBILITY} )
+         #-------------------------------------------------------------------
+         # Get source into local build directory
+         #-------------------------------------------------------------------
+-- 
+2.41.0
+

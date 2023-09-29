@@ -14,6 +14,8 @@ source:
     - 0001-python-add-linker-flag-for-the-directory-containing-.patch
     - 0002-python-fix-linking-issues-with-ndscxx.patch
     - 0003-python-use-undefined-dynamic_lookup-on-macos.patch
+    - 0004-java-fix-linking-issues-with-ndscxx.patch
+    - 0005-Added-JAVA-compatibility-detection-code-to-configura.patch
 
 build:
   error_overdepending: true
