@@ -113,8 +113,9 @@ outputs:
         - {{ pin_compatible('numpy') }}
         - python
     test:
-      imports:
-        - nds2
+      requires:
+        - pytest
+      script: test_nds2.py
     about:
       home: https://wiki.ligo.org/Computing/NDSClient
       dev_url: https://git.ligo.org/nds/nds2-client.git
