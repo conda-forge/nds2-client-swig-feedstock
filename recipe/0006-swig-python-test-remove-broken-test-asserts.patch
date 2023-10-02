@@ -1,0 +1,33 @@
+From 86df627e92c45a475638b4bfb926adcbdfa2a029 Mon Sep 17 00:00:00 2001
+From: "duncan.macleod" <duncan.macleod@ligo.org>
+Date: Mon, 2 Oct 2023 09:39:13 +0100
+Subject: [PATCH 6/6] swig/python/test: remove broken test asserts
+
+the nds2.channel doesn't seem to propagate these methods upstream any more
+---
+ swig/python/test/test_mockup.py | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/swig/python/test/test_mockup.py b/swig/python/test/test_mockup.py
+index 54ee2a7..f98e78c 100644
+--- a/swig/python/test/test_mockup.py
++++ b/swig/python/test/test_mockup.py
+@@ -98,7 +98,6 @@ channel_type_tests = {
+ }
+ for channel_type in channel_type_tests:
+     print(channel_type_tests[channel_type])
+-    assert nds2.channel_channel_type_to_string( channel_type ) == channel_type_tests[channel_type]
+     assert nds2.channel.channel_type_to_string( channel_type ) == channel_type_tests[channel_type]
+ 
+ data_type_tests = {
+@@ -113,7 +112,6 @@ data_type_tests = {
+ for data_type in data_type_tests:
+     print(data_type_tests[data_type])
+     print(nds2.channel.data_type_to_string( data_type ))
+-    assert nds2.channel_data_type_to_string( data_type ) == data_type_tests[data_type]
+     assert nds2.channel.data_type_to_string( data_type ) == data_type_tests[data_type]
+ 
+ channels = conn.find_channels('*')
+-- 
+2.39.2
+
