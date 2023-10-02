@@ -30,7 +30,7 @@ requirements:
     - cmake >=3.6
     - make  # [unix]
     - pkg-config
-    - swig >=3.0.7,<4.1.0a0
+    - swig >=3.0.7
   host:
     - nds2-client {{ nds2_client_version }}
 
@@ -61,7 +61,7 @@ outputs:
         - make  # [not win]
         - openjdk  # [build_platform != target_platform]
         - pkg-config  # [not win]
-        - swig >=3.0.7,<4.1.0a0
+        - swig >=3.0.7
       host:
         - openjdk
         - nds2-client {{ nds2_client_version }}
@@ -100,7 +100,7 @@ outputs:
         - cmake >=3.6
         - make  # [unix]
         - pkg-config
-        - swig >=3.0.7,<4.1.0a0
+        - swig >=3.0.7
         # extras for cross-compiling
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
         - numpy                               # [build_platform != target_platform]
