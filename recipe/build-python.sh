@@ -19,6 +19,7 @@ cmake \
 	-DENABLE_SWIG_PYTHON2:BOOL=no \
 	-DENABLE_SWIG_PYTHON3:BOOL=yes \
 	-DPYTHON3_VERSION:STRING=${PY_VER} \
+	-DSWIG_EXECUTABLE:PATH="${BUILD_PREFIX}/bin/swig" \
 ;
 
 # build
@@ -29,6 +30,7 @@ cmake --build python --parallel ${CPU_COUNT} --verbose --target install
 
 # test
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
+export TEST_VERBOSE_LEVEL=100
 ctest --parallel ${CPU_COUNT} --extra-verbose --output-on-failure
 fi
 

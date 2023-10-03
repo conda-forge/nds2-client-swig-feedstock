@@ -14,11 +14,14 @@ source:
     - 0001-python-add-linker-flag-for-the-directory-containing-.patch
     - 0002-python-fix-linking-issues-with-ndscxx.patch
     - 0003-python-use-undefined-dynamic_lookup-on-macos.patch
+    - 0004-java-fix-linking-issues-with-ndscxx.patch
+    - 0005-Added-JAVA-compatibility-detection-code-to-configura.patch
+    - 0006-cx_python-use-sysconfig-instead-of-distutils.patch
 
 build:
   error_overdepending: true
   error_overlinking: true  # [not win]
-  number: 3
+  number: 4
 
 requirements:
   build:
@@ -88,6 +91,7 @@ outputs:
         - numpy
         - python  # [not win]
         - ucrt  # [win]
+        - vc14_runtime  # [win]
         - vs2015_runtime  # [win]
       skip: true  # [python_impl != 'cpython']
     requirements:
@@ -113,8 +117,9 @@ outputs:
         - {{ pin_compatible('numpy') }}
         - python
     test:
-      imports:
-        - nds2
+      requires:
+        - pytest
+      script: test_nds2.py
     about:
       home: https://wiki.ligo.org/Computing/NDSClient
       dev_url: https://git.ligo.org/nds/nds2-client.git

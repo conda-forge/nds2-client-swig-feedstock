@@ -1,7 +1,7 @@
 From 912475f0fb40fa86d7b1419b1a22531db74f2122 Mon Sep 17 00:00:00 2001
 From: "duncan.macleod" <duncan.macleod@ligo.org>
 Date: Wed, 3 Aug 2022 10:02:36 +0100
-Subject: [PATCH 3/3] python: use -undefined dynamic_lookup on macos
+Subject: [PATCH 3/6] python: use -undefined dynamic_lookup on macos
 
 ---
  .../Autotools/ArchiveX/cx_swig_python_module.cmake       | 9 ++++++---
@@ -32,5 +32,5 @@ index f488363..63c107b 100644
    #----------------------------------------------------------------------
    # Compile .py files
 -- 
-2.20.1
+2.39.2
 

@@ -1,17 +1,47 @@
+About nds2-client-swig-feedstock
+================================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nds2-client-swig-feedstock/blob/main/LICENSE.txt)
+
+
 About nds2-client-swig
-======================
+----------------------
 
 Home: https://wiki.ligo.org/Computing/NDSClient
 
 Package license: GPL-3.0-or-later
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nds2-client-swig-feedstock/blob/main/LICENSE.txt)
 
 Summary: NDS2 Client interface SWIG wrappings
 
 Development: https://git.ligo.org/nds/nds2-client.git
 
 This provides SWIG interface files for the NDS2 client.
+
+About nds2-client-java
+----------------------
+
+Home: https://wiki.ligo.org/Computing/NDSClient
+
+Package license: GPL-3.0-or-later
+
+Summary: Java extensions for NDS2
+
+Development: https://git.ligo.org/nds/nds2-client.git
+
+This provides Java wrappers for the nds2 client.
+
+About python-nds2-client
+------------------------
+
+Home: https://wiki.ligo.org/Computing/NDSClient
+
+Package license: GPL-3.0-or-later
+
+Summary: Python extensions for NDS2
+
+Development: https://git.ligo.org/nds/nds2-client.git
+
+This provides python wrappers for the nds2 client.
 
 Current build status
 ====================
