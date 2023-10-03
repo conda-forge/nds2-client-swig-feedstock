@@ -1,0 +1,28 @@
+From 3bdea34af9dee6bf044c442528ceffabee7c889d Mon Sep 17 00:00:00 2001
+From: "duncan.macleod" <duncan.macleod@ligo.org>
+Date: Tue, 3 Oct 2023 09:11:34 +0100
+Subject: [PATCH 6/6] cx_python: use sysconfig instead of distutils
+
+distutils was removed in Python 3.12
+---
+ swig/config/cmake/Modules/Autotools/Archive/cx_python.cmake | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/swig/config/cmake/Modules/Autotools/Archive/cx_python.cmake b/swig/config/cmake/Modules/Autotools/Archive/cx_python.cmake
+index 010fb09..50c9718 100644
+--- a/swig/config/cmake/Modules/Autotools/Archive/cx_python.cmake
++++ b/swig/config/cmake/Modules/Autotools/Archive/cx_python.cmake
+@@ -101,8 +101,8 @@ function( cx_python )
+     #--------------------------------------------------------------------
+     # Determine where packages should be installed
+     #--------------------------------------------------------------------
+-    set( pythondir_script "from distutils.sysconfig import get_python_lib; print( get_python_lib(1,0,\"${CMAKE_INSTALL_PREFIX}\") );" )
+-    set( pyexecdir_script "from distutils.sysconfig import get_python_lib; print( get_python_lib(1,0,\"${CMAKE_INSTALL_PREFIX}\") );" )
++    set( pythondir_script "from sysconfig import get_path; print(get_path(\"platlib\", vars={\"platbase\": \"${CMAKE_INSTALL_PREFIX}\"}));" )
++    set( pyexecdir_script "from sysconfig import get_path; print(get_path(\"platlib\", vars={\"platbase\": \"${CMAKE_INSTALL_PREFIX}\"}));" )
+ 
+     execute_process(
+       COMMAND ${PYTHON_EXECUTABLE} -c "${pythondir_script}"
+-- 
+2.39.2
+

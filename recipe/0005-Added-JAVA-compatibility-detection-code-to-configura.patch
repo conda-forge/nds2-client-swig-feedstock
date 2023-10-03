@@ -1,7 +1,7 @@
 From 838515d24bf5a8ed43ec9c0792c9c664cb7dcf25 Mon Sep 17 00:00:00 2001
 From: Ed Maros <ed.maros@ligo.org>
 Date: Thu, 27 Oct 2022 14:54:42 -0700
-Subject: [PATCH 5/5] Added JAVA compatibility detection code to configuration
+Subject: [PATCH 5/6] Added JAVA compatibility detection code to configuration
  process (clossed #110)
 
 (cherry picked from commit bbc7ec4355071f5757e33fd8af94aa603f9949e4)
@@ -111,5 +111,5 @@ index 1b4d2bf..545d34c 100644
          # Get source into local build directory
          #-------------------------------------------------------------------
 -- 
-2.41.0
+2.39.2
 
