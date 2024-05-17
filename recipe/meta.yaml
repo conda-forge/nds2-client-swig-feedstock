@@ -21,11 +21,12 @@ source:
 build:
   error_overdepending: true
   error_overlinking: true  # [not win]
-  number: 4
+  number: 5
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - cmake >=3.6
     - make  # [unix]
@@ -56,6 +57,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - cmake >=3.6
         - make  # [not win]
@@ -97,6 +99,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - cmake >=3.6
         - make  # [unix]
@@ -114,7 +117,6 @@ outputs:
         - python
       run:
         - nds2-client >={{ nds2_client_version }}
-        - {{ pin_compatible('numpy') }}
         - python
     test:
       requires:
