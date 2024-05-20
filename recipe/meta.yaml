@@ -19,13 +19,13 @@ source:
     - 0006-cx_python-use-sysconfig-instead-of-distutils.patch
 
 build:
-  error_overdepending: true
   error_overlinking: true  # [not win]
-  number: 4
+  number: 5
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - cmake >=3.6
     - make  # [unix]
@@ -46,7 +46,6 @@ outputs:
     script: build-java.sh  # [not win]
     script: build-java.bat  # [win]
     build:
-      error_overdepending: true
       error_overlinking: true
       ignore_run_exports:
         - libstdcxx-ng  # [linux]
@@ -56,6 +55,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - cmake >=3.6
         - make  # [not win]
@@ -85,10 +85,8 @@ outputs:
     script: build-python.sh  # [not win]
     script: build-python.bat  # [win]
     build:
-      error_overdepending: true
       error_overlinking: true
       ignore_run_exports:
-        - numpy
         - python  # [not win]
         - ucrt  # [win]
         - vc14_runtime  # [win]
@@ -97,6 +95,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - cmake >=3.6
         - make  # [unix]
@@ -114,7 +113,6 @@ outputs:
         - python
       run:
         - nds2-client >={{ nds2_client_version }}
-        - {{ pin_compatible('numpy') }}
         - python
     test:
       requires:
