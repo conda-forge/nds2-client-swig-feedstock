@@ -90,7 +90,6 @@ outputs:
       error_overdepending: true
       error_overlinking: true
       ignore_run_exports:
-        - numpy
         - python  # [not win]
         - ucrt  # [win]
         - vc14_runtime  # [win]
