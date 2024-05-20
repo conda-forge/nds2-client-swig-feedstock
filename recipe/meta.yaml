@@ -19,7 +19,6 @@ source:
     - 0006-cx_python-use-sysconfig-instead-of-distutils.patch
 
 build:
-  error_overdepending: true
   error_overlinking: true  # [not win]
   number: 5
 
@@ -47,7 +46,6 @@ outputs:
     script: build-java.sh  # [not win]
     script: build-java.bat  # [win]
     build:
-      error_overdepending: true
       error_overlinking: true
       ignore_run_exports:
         - libstdcxx-ng  # [linux]
@@ -87,7 +85,6 @@ outputs:
     script: build-python.sh  # [not win]
     script: build-python.bat  # [win]
     build:
-      error_overdepending: true
       error_overlinking: true
       ignore_run_exports:
         - python  # [not win]
