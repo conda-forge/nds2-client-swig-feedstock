@@ -47,10 +47,10 @@ outputs:
     script: build-java.bat  # [win]
     build:
       error_overlinking: true
-      ignore_run_exports:
-        # don't ignore all run-exports from {{ compiler('cxx') }}, we need libgcc
-        - libstdcxx     # [linux]
-        - libstdcxx-ng  # [linux]
+      ignore_run_exports_from:
+        # we want to ignore libstdcxx, but not libgcc; the latter also comes in through
+        # compiler('c'), and conda keeps that despite ignoring the cxx run-exports
+        - {{ compiler('cxx') }}
       # see https://git.ligo.org/nds/nds2-client/-/issues/141
       skip: true  # [win]
     requirements:
