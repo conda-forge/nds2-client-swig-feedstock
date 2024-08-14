@@ -236,6 +236,3 @@ Feedstock Maintainers
 * [@duncanmmacleod](https://github.com/duncanmmacleod/)
 * [@emaros](https://github.com/emaros/)
 
-
-<!-- dummy commit to enable rerendering -->
-
