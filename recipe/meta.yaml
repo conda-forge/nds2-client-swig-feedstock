@@ -50,7 +50,7 @@ outputs:
       ignore_run_exports_from:
         # we want to ignore libstdcxx, but not libgcc; the latter also comes in through
         # compiler('c'), and conda keeps that despite ignoring the cxx run-exports
-        - {{ compiler('cxx') }}
+        - {{ compiler('cxx') }}  # [not osx]
       # see https://git.ligo.org/nds/nds2-client/-/issues/141
       skip: true  # [win]
     requirements:
