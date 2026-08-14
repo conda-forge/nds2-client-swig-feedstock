@@ -20,7 +20,7 @@ source:
 
 build:
   error_overlinking: true  # [not win]
-  number: 8
+  number: 9
 
 requirements:
   build:
@@ -104,7 +104,7 @@ outputs:
         - numpy                               # [build_platform != target_platform]
         - python                              # [build_platform != target_platform]
       host:
-        - libpython  # [win]
+        - distutils-activate-mingw  # [win]
         - nds2-client {{ nds2_client_version }}
         - {{ pin_subpackage('nds2-client-swig', exact=True) }}
         - numpy
